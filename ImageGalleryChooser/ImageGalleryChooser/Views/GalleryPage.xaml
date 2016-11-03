@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ImageGalleryChooser.Views.GalleryPage"
+            xmlns:gallery="clr-namespace:Naylah.Xamarin.Controls.Customizations;assembly=Naylah.Xamarin"
+             xmlns:cached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="Gallery" BackgroundColor="#181829">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Image" Icon="ic_add_white_24dp" Command="{Binding ChooseImageCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+
+            <cached:CachedImage HorizontalOptions="FillAndExpand"
+                                Source="{Binding SelectedImage.Image}"
+                                HeightRequest="200"
+                                WidthRequest="400"
+                                x:Name="imgDetail"
+                                Aspect="AspectFill" />
+
+            <gallery:ImageGalleryView ItemsSource="{Binding Images}"
+                                      ItemClick="ImageGalleryView_ItemClick">
+
+                <gallery:ImageGalleryView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <ContentView.Content>
+
+                                <cached:CachedImage Source="{Binding Image}"
+                                                HeightRequest="100"
+                                                HorizontalOptions="FillAndExpand"
+                                                Aspect="AspectFill" />
+                            </ContentView.Content>
+                        </ContentView>
+                    </DataTemplate>
+                </gallery:ImageGalleryView.ItemTemplate>
+            </gallery:ImageGalleryView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
